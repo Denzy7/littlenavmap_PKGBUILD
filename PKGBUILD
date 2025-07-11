@@ -6,7 +6,7 @@ _marblever=1.1
 _xpconnectver=1.2.1
 _navconnectver=$pkgver
 _xpsdkver=301
-pkgrel=2
+pkgrel=3
 epoch=
 pkgdesc="A Free Open Source Flight Planner, Navigation Tool, Moving
 Map, Airport Search, and Airport Information System for
@@ -27,6 +27,9 @@ backup=()
 options=()
 install=
 changelog=
+#it's either this or recompile qt5-base as static :(
+#we only need it for the xplane plugin
+_binary=LittleNavmap-linux-ubuntu-22.04-${pkgver}.tar.xz
 source=(
         "atools-v$_atoolsver.zip::https://github.com/albar965/atools/archive/refs/tags/v$_atoolsver.zip"
         "http://developer.x-plane.com/wp-content/plugins/code-sample-generation/sdk_zip_files/XPSDK$_xpsdkver.zip"
@@ -36,7 +39,8 @@ source=(
         "littlenavmap-v$pkgver.zip::https://github.com/albar965/littlenavmap/archive/refs/tags/v$pkgver.zip"
         "qt.conf"
         "LittleNavmap.desktop"
-        )
+        "https://github.com/albar965/littlenavmap/releases/download/v${pkgver}/${_binary}"
+    )
 noextract=()
 sha256sums=('50bb00f2bab56ffdcb3176eb719bb0833786aa04d0903e672cecfafa1f156ac5'
             'bf0b38ee82283ce18418cf37af3ace83a2cf8e2e88b1951e337be415961c5cbc'
@@ -45,7 +49,8 @@ sha256sums=('50bb00f2bab56ffdcb3176eb719bb0833786aa04d0903e672cecfafa1f156ac5'
             'SKIP'
             'c6852de7eef0e4eafc606aef2275482896343660811b1b2f8da007430ee181b9'
             '1a47df8eda4bb56c52180a521ac0b573e68b9be23344cecae1685dbe49d12be4'
-            'cd8009076d1f6c4300f98089eeb8acb5ea09fdb3bbafe83ccce910f0a05da51d')
+            'cd8009076d1f6c4300f98089eeb8acb5ea09fdb3bbafe83ccce910f0a05da51d'
+            '30ad3afc510dbbda3ea92c033d6da376bb04980fda3f16fabe021a9446b55cf6')
 validpgpkeys=()
 
 prepare() {
@@ -113,13 +118,6 @@ build() {
     make -j$(nproc)
     make deploy
     eval rm -fr "$_deploydir/Little\ Navconnect/lib $_deploydir/Little\ Navconnect/qt.conf"
-
-    # littlexpconnect
-    mkdir -p "$_littlexpconnect_builddir"
-    cd "$_littlexpconnect_builddir"
-    ATOOLS_NO_CRASHHANDLER=true ATOOLS_INC_PATH="$_atools_srcdir/src" ATOOLS_LIB_PATH="$_atools_builddir" DEPLOY_BASE="$_deploydir" XPSDK_BASE="$srcdir/SDK" qmake "$_littlexpconnect_srcdir/littlexpconnect.pro" -spec linux-g++ CONFIG+=release
-    make -j$(nproc)
-    make deploy
 }
 
 package() {
@@ -138,6 +136,8 @@ package() {
     cp "$srcdir/qt.conf" "$_approot_pkg/Little Navmap"
     cp "$srcdir/qt.conf" "$_approot_pkg/Little Navconnect"
     cp "$srcdir/LittleNavmap.desktop" "${pkgdir}/usr/share/applications"
+
+    cp -r "$srcdir/LittleNavmap-linux-ubuntu-22.04-$pkgver/Little Xpconnect" "$_approot_pkg"
     ln -sf "/$_approot/Little Navmap/littlenavmap" "${pkgdir}/usr/bin/littlenavmap"
 }
 
