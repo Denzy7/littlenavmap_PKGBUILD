@@ -1,0 +1,3 @@
+- an alternative to littlenavmap-bin which is more lightweight(-400% less disk space usage as some small performance gains. You'll notice less stutters when zooming in or out the map when there are lots of items enabled)
+- attemps to use system libraries, likewise it respects system theme
+- NOTE: you'll have to install the plugin /usr/lib/littlenavmap-@VERSION@/Little XpConnect to your xplane plugins folder
