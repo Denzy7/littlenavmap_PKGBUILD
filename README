@@ -1,3 +1,4 @@
 - an alternative to littlenavmap-bin which is more lightweight(-400% less disk space usage as some small performance gains. You'll notice less stutters when zooming in or out the map when there are lots of items enabled)
+- wayland support is a poorer compared to X11. Docking is practially impossible on wayland, X11 at least doesn't draw decorations on docked windows. X11 starts 1sec faster than Wayland. General performance is on-par
 - attemps to use system libraries, likewise it respects system theme
 - NOTE: you'll have to install the plugin /usr/lib/littlenavmap-@VERSION@/Little XpConnect to your xplane plugins folder
