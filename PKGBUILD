@@ -6,7 +6,7 @@ _xpconnectver=1.2.2
 _navconnectver=3.0.17
 _marblever=1.1
 _xpsdkver=301
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="A Free Open Source Flight Planner, Navigation Tool, Moving
 Map, Airport Search, and Airport Information System for
@@ -76,7 +76,7 @@ build() {
     _marble_srcdir="$srcdir/marble"
     _marble_builddir="$_builddir/marble"
     _marble_installdir="$_marble_builddir/marble-rel"
-    
+
     _littlenavmap_srcdir="$srcdir/littlenavmap-$pkgver"
     _littlenavmap_builddir="$_builddir/littlenavmap"
 
@@ -137,7 +137,7 @@ package() {
     cp "$srcdir/qt.conf" "$_approot_pkg/Little Navconnect"
     cp "$srcdir/LittleNavmap.desktop" "${pkgdir}/usr/share/applications"
 
-    cp -r "$srcdir/LittleNavmap-linux-ubuntu-22.04-$pkgver/Little Xpconnect" "$_approot_pkg"
+    cp -r "$srcdir/LittleNavmap-linux-ubuntu-22.04-$pkgver/Little Xpconnect" "$_approot_pkg/Little Navmap"
     ln -sf "/$_approot/Little Navmap/littlenavmap" "${pkgdir}/usr/bin/littlenavmap"
 }
 
