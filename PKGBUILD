@@ -1,4 +1,4 @@
-# Maintainer: Dennis Maina <dennismyner@gmail.com>
+# Maintainer: Dennis Maina <dennismyner7@gmail.com>
 pkgname=littlenavmap
 pkgver=3.0.18
 _atoolsver=4.0.18
@@ -6,7 +6,7 @@ _xpconnectver=1.2.2
 _navconnectver=3.0.17
 _marblever=1.1
 _xpsdkver=301
-pkgrel=2
+pkgrel=3
 epoch=
 pkgdesc="A Free Open Source Flight Planner, Navigation Tool, Moving
 Map, Airport Search, and Airport Information System for
